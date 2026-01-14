@@ -9,9 +9,9 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
-      { text: '院校名录', link: '/universities/' },
-      { text: '推免资讯', link: '/guide/' },
-      { text: '关于平台', link: '/about/' }
+      { text: '院校名录', link: '/universities' },
+      { text: '推免资讯', link: '/guide' },
+      { text: '关于平台', link: '/about' }
     ],
 
     sidebar: {
