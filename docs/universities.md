@@ -108,6 +108,11 @@ const toggleSort = () => {
 // 统计
 const totalCount = computed(() => universities.length)
 const displayCount = computed(() => sortedUniversities.value.length)
+
+// 点击卡片跳转
+const goToDetail = (link) => {
+  window.location.href = link
+}
 </script>
 
 <!-- 页面标题区 -->
@@ -178,7 +183,7 @@ const displayCount = computed(() => sortedUniversities.value.length)
       v-for="university in sortedUniversities"
       :key="university.id"
       class="university-card"
-      @click="window.location.href = university.link"
+      @click="goToDetail(university.link)"
     >
       <!-- 卡片头部：名称 + 收藏按钮 -->
       <div class="card-header">
