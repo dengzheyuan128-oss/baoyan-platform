@@ -115,142 +115,134 @@ const goToDetail = (link) => {
 }
 </script>
 
-<!-- 页面标题区 -->
-<div class="page-title-section">
-  <p class="page-subtitle">2025年最新收录 · 985/211高校</p>
-  <h1 class="page-main-title">
-    <span class="title-dark">文苑</span>
-    <span class="title-blue">推免指南</span>
-  </h1>
-  <p class="page-description">汇集全国顶尖高校文学院/中文系推免硕士考核通知，助您在学术之路上，寻得理想归处。</p>
-</div>
-
-<!-- 搜索和筛选区 -->
-<div class="search-filter-section">
-  <div class="search-bar-wrapper">
-    <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="9" cy="9" r="7"/>
-      <path d="M14 14L19 19"/>
-    </svg>
-    <input
-      v-model="searchQuery"
-      type="text"
-      class="search-input"
-      placeholder="搜索高校名称或专业..."
-    />
+<ClientOnly>
+  <div class="page-title-section">
+    <p class="page-subtitle">2025年最新收录 · 985/211高校</p>
+    <h1 class="page-main-title">
+      <span class="title-dark">文苑</span>
+      <span class="title-blue">推免指南</span>
+    </h1>
+    <p class="page-description">汇集全国顶尖高校文学院/中文系推免硕士考核通知，助您在学术之路上，寻得理想归处。</p>
   </div>
 
-  <div class="filter-buttons-wrapper">
-    <button
-      v-for="filter in [
-        { label: '全部', value: 'all' },
-        { label: '第一梯队', value: 'tier-1' },
-        { label: '第二梯队', value: 'tier-2' },
-        { label: '第三梯队', value: 'tier-3' },
-        { label: '第四梯队', value: 'tier-4' },
-        { label: '第五梯队', value: 'tier-5' }
-      ]"
-      :key="filter.value"
-      :class="['filter-btn', { active: activeFilter === filter.value }]"
-      @click="activeFilter = filter.value"
-    >
-      {{ filter.label }}
-    </button>
-  </div>
-</div>
-
-<!-- 院校名录区 -->
-<div class="university-section">
-  <div class="section-header">
-    <div class="section-title">
-      <svg width="24" height="24" viewBox="0 0 20 20" fill="#1e40af">
-        <path d="M4 2H16V4H4V2ZM2 6H18V8H2V6ZM3 10H17V12H3V10ZM3 14H17V16H3V14ZM5 18H15V20H5V18Z"/>
+  <div class="search-filter-section">
+    <div class="search-bar-wrapper">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="9" cy="9" r="7"/>
+        <path d="M14 14L19 19"/>
       </svg>
-      <span>院校名录</span>
-      <span class="count">共收录 <strong>{{ displayCount }}</strong> 所高校</span>
+      <input
+        v-model="searchQuery"
+        type="text"
+        class="search-input"
+        placeholder="搜索高校名称或专业..."
+      />
     </div>
-    <button class="sort-btn" @click="toggleSort">
-      按拼音排序
-      <svg :style="{ transform: sortOrder === 'desc' ? 'rotate(180deg)' : 'none' }" width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
-        <path d="M5 7L10 12L15 7H5Z"/>
-      </svg>
-    </button>
+
+    <div class="filter-buttons-wrapper">
+      <button
+        v-for="filter in [
+          { label: '全部', value: 'all' },
+          { label: '第一梯队', value: 'tier-1' },
+          { label: '第二梯队', value: 'tier-2' },
+          { label: '第三梯队', value: 'tier-3' },
+          { label: '第四梯队', value: 'tier-4' },
+          { label: '第五梯队', value: 'tier-5' }
+        ]"
+        :key="filter.value"
+        :class="['filter-btn', { active: activeFilter === filter.value }]"
+        @click="activeFilter = filter.value"
+      >
+        {{ filter.label }}
+      </button>
+    </div>
   </div>
 
-  <!-- 院校卡片网格 -->
-  <div class="university-grid">
-    <div
-      v-for="university in sortedUniversities"
-      :key="university.id"
-      class="university-card"
-      @click="goToDetail(university.link)"
-    >
-      <!-- 卡片头部：名称 + 收藏按钮 -->
-      <div class="card-header">
-        <div class="header-left">
-          <div class="university-name">{{ university.name }}</div>
-          <div class="university-meta">
-            <span class="tier-tag">{{ university.tier }}</span>
-            <span class="degree-type">{{ university.degreeType }}</span>
+  <div class="university-section">
+    <div class="section-header">
+      <div class="section-title">
+        <svg width="24" height="24" viewBox="0 0 20 20" fill="#1e40af">
+          <path d="M4 2H16V4H4V2ZM2 6H18V8H2V6ZM3 10H17V12H3V10ZM3 14H17V16H3V14ZM5 18H15V20H5V18Z"/>
+        </svg>
+        <span>院校名录</span>
+        <span class="count">共收录 <strong>{{ displayCount }}</strong> 所高校</span>
+      </div>
+      <button class="sort-btn" @click="toggleSort">
+        按拼音排序
+        <svg :style="{ transform: sortOrder === 'desc' ? 'rotate(180deg)' : 'none' }" width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M5 7L10 12L15 7H5Z"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="university-grid">
+      <div
+        v-for="university in sortedUniversities"
+        :key="university.id"
+        class="university-card"
+        @click="goToDetail(university.link)"
+      >
+        <div class="card-header">
+          <div class="header-left">
+            <div class="university-name">{{ university.name }}</div>
+            <div class="university-meta">
+              <span class="tier-tag">{{ university.tier }}</span>
+              <span class="degree-type">{{ university.degreeType }}</span>
+            </div>
           </div>
+          <button
+            class="favorite-btn"
+            :class="{ active: isFavorite(university.id) }"
+            @click.stop="toggleFavorite(university.id)"
+            title="收藏"
+          >
+            <svg viewBox="0 0 20 20">
+              <path d="M10 2L8.5 5.5L5 6L7.5 8.5L7 12L10 10.5L13 12L12.5 8.5L15 6L11.5 5.5L10 2Z"/>
+            </svg>
+          </button>
         </div>
-        <button
-          class="favorite-btn"
-          :class="{ active: isFavorite(university.id) }"
-          @click.stop="toggleFavorite(university.id)"
-          title="收藏"
-        >
-          <svg viewBox="0 0 20 20">
-            <path d="M10 2L8.5 5.5L5 6L7.5 8.5L7 12L10 10.5L13 12L12.5 8.5L15 6L11.5 5.5L10 2Z"/>
+
+        <div class="card-info">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4H16V16H4V4Z"/>
           </svg>
-        </button>
-      </div>
+          {{ university.majors.slice(0, 2).join('、') }} 等
+        </div>
 
-      <!-- 专业方向 -->
-      <div class="card-info">
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M4 4H16V16H4V4Z"/>
-        </svg>
-        {{ university.majors.slice(0, 2).join('、') }} 等
-      </div>
-
-      <!-- 截止时间 -->
-      <div class="card-deadline">
-        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="4" width="14" height="12" rx="2"/>
-          <path d="M3 8H17"/>
-          <path d="M8 2V6"/>
-          <path d="M12 2V6"/>
-        </svg>
-        {{ university.deadlineDisplay }}
-      </div>
-
-      <!-- 卡片底部 -->
-      <div class="card-footer">
-        <span class="degree-type-label">{{ university.degreeType }}</span>
-        <span class="view-details">
-          查看详情
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12H14M12 15L15 12L12 9M15 12H9"/>
+        <div class="card-deadline">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="14" height="12" rx="2"/>
+            <path d="M3 8H17"/>
+            <path d="M8 2V6"/>
+            <path d="M12 2V6"/>
           </svg>
-        </span>
+          {{ university.deadlineDisplay }}
+        </div>
+
+        <div class="card-footer">
+          <span class="degree-type-label">{{ university.degreeType }}</span>
+          <span class="view-details">
+            查看详情
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12H14M12 15L15 12L12 9M15 12H9"/>
+            </svg>
+          </span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- 无结果提示 -->
-  <div v-if="sortedUniversities.length === 0" class="no-results">
-    <svg width="64" height="64" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-      <circle cx="10" cy="10" r="8"/>
-      <path d="M10 6V10M10 14H10.01"/>
-    </svg>
-    <p class="no-results-title">未找到匹配的院校信息</p>
-    <p class="no-results-desc">请尝试其他搜索关键词或筛选条件</p>
+    <div v-if="sortedUniversities.length === 0" class="no-results">
+      <svg width="64" height="64" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="10" cy="10" r="8"/>
+        <path d="M10 6V10M10 14H10.01"/>
+      </svg>
+      <p class="no-results-title">未找到匹配的院校信息</p>
+      <p class="no-results-desc">请尝试其他搜索关键词或筛选条件</p>
+    </div>
   </div>
-</div>
+</ClientOnly>
 
 <style scoped>
-/* 页面标题区 */
 .page-title-section {
   text-align: center;
   margin-bottom: 40px;
@@ -286,7 +278,6 @@ const goToDetail = (link) => {
   margin-right: auto;
 }
 
-/* 搜索和筛选区 */
 .search-filter-section {
   margin-bottom: 32px;
 }
@@ -348,7 +339,6 @@ const goToDetail = (link) => {
   border-color: #1e40af;
 }
 
-/* 院校名录区 */
 .university-section {
   margin-top: 40px;
 }
@@ -399,7 +389,6 @@ const goToDetail = (link) => {
   color: #1e40af;
 }
 
-/* 院校卡片 */
 .university-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -531,7 +520,6 @@ const goToDetail = (link) => {
   height: 16px;
 }
 
-/* 无结果 */
 .no-results {
   text-align: center;
   padding: 60px 20px;
@@ -553,7 +541,6 @@ const goToDetail = (link) => {
   margin: 0;
 }
 
-/* 响应式 */
 @media (max-width: 768px) {
   .page-main-title {
     font-size: 36px;
