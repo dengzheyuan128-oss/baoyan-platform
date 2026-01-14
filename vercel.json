@@ -2,12 +2,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "docs/.vitepress/dist",
   "installCommand": "npm install",
-  "framework": null,
-  "devCommand": "npm run dev",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/$1"
-    }
-  ]
+  "framework": "vitepress",
+  "devCommand": "vitepress dev docs"
 }
