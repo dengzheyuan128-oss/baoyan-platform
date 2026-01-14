@@ -1,177 +1,513 @@
+/**
+ * 文苑推免指南 - 自定义样式
+ * 完全还原原始 HTML 网站设计
+ */
+
+/* ==================== CSS 变量定义 ==================== */
 :root {
-  --vp-c-brand: #1e40af;
-  --vp-c-brand-light: #3b82f6;
-  --vp-c-brand-dark: #1e3a8a;
-  --vp-home-hero-name-color: #1e40af;
-  --vp-home-hero-name-background: linear-gradient(120deg, #1e40af 0%, #3b82f6 100%);
+  /* 品牌色 - 蓝色系 */
+  --primary-blue: #1e40af;
+  --primary-blue-light: #3b82f6;
+  --primary-blue-dark: #1e3a8a;
+  --light-blue: #e0e7ff;
+
+  /* 背景色 */
+  --bg-color: #f8f5f0;
+  --card-bg: #ffffff;
+
+  /* 文字颜色 */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+
+  /* 边框颜色 */
+  --border-color: #e5e7eb;
+
+  /* 间距系统 */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 20px;
+  --spacing-lg: 32px;
+  --spacing-xl: 40px;
+
+  /* 圆角 */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(30, 64, 175, 0.1);
+  --shadow-lg: 0 6px 20px rgba(30, 64, 175, 0.15);
+
+  /* 过渡 */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
 }
 
+/* ==================== 全局样式覆写 ==================== */
+.VPContent {
+  background-color: var(--bg-color);
+}
+
+.VPDoc {
+  background-color: var(--bg-color);
+}
+
+/* 隐藏默认的 VitePress 页面标题，在组件中自定义 */
+.VPDocHeader {
+  display: none;
+}
+
+/* ==================== 卡片样式（核心） ==================== */
+.university-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  position: relative;
+}
+
+.university-card:hover {
+  border-color: var(--primary-blue);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* 卡片头部 */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-sm);
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* 收藏按钮 */
+.favorite-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--text-muted);
+  padding: 4px;
+  transition: color var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite-btn:hover {
+  color: #ef4444;
+}
+
+.favorite-btn.active {
+  color: #ef4444;
+}
+
+/* 标签容器 */
+.card-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-sm);
+}
+
+.tag {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.tag-985 {
+  background-color: var(--light-blue);
+  color: var(--primary-blue);
+}
+
+.tag-211 {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.tag-tier {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+/* 卡片内容 */
+.card-body {
+  margin-bottom: var(--spacing-sm);
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.info-value {
+  color: var(--text-primary);
+  flex: 1;
+}
+
+/* 卡片底部 */
+.card-footer {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--border-color);
+}
+
+.card-btn {
+  flex: 1;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: none;
+}
+
+.card-btn-primary {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+.card-btn-primary:hover {
+  background-color: var(--primary-blue-dark);
+}
+
+.card-btn-secondary {
+  background-color: white;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.card-btn-secondary:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+/* ==================== 搜索框样式 ==================== */
+.search-section {
+  margin-bottom: var(--spacing-md);
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 16px;
+  padding-right: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  transition: all var(--transition-fast);
+  background: white;
+  color: var(--text-primary);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 18px;
+  padding: 4px;
+  display: none;
+}
+
+.search-clear.show {
+  display: block;
+}
+
+.search-clear:hover {
+  color: var(--text-secondary);
+}
+
+/* ==================== 筛选按钮样式 ==================== */
+.filter-section {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-md);
+}
+
+.filter-btn {
+  padding: 8px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: white;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.filter-btn.active {
+  background: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+}
+
+/* ==================== 统计横幅样式 ==================== */
+.stats-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+.stats-info {
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.stats-info strong {
+  color: var(--primary-blue);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sort-controls {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.sort-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: white;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.sort-btn:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.sort-btn.active {
+  background: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+}
+
+/* ==================== 网格布局 ==================== */
+.university-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ==================== 无结果提示 ==================== */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
+.no-results-icon {
+  font-size: 48px;
+  margin-bottom: var(--spacing-md);
+  opacity: 0.5;
+}
+
+.no-results-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.no-results-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+  .university-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .filter-section {
+    flex-direction: column;
+  }
+
+  .filter-btn {
+    width: 100%;
+  }
+
+  .stats-banner {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: flex-start;
+  }
+
+  .sort-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .sort-btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .card-footer {
+    flex-direction: column;
+  }
+
+  .info-row {
+    flex-direction: column;
+  }
+
+  .info-label {
+    margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .favorite-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+
+  .card-title {
+    padding-right: 32px;
+  }
+}
+
+/* ==================== 首页英雄区域 ==================== */
 .VPHero .name {
-  background: var(--vp-home-hero-name-background);
+  background: linear-gradient(120deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* 自定义卡片样式 */
-.university-card {
-  border: 1px solid var(--vp-c-border);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
+.VPHero .text {
+  color: var(--text-secondary);
 }
 
-.university-card:hover {
-  border-color: var(--vp-c-brand);
-  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.1);
-  transform: translateY(-2px);
+.VPHero .actions .action {
+  background: var(--primary-blue);
+  color: white;
+  border-radius: var(--radius-sm);
 }
 
-.university-card h3 {
-  color: var(--vp-c-brand);
-  margin: 0 0 0.5rem 0;
+.VPHero .actions .action.secondary {
+  background: white;
+  color: var(--primary-blue);
+  border: 1px solid var(--primary-blue);
 }
 
-.university-tags {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin: 0.5rem 0;
+/* ==================== 导航栏样式 ==================== */
+.VPNavBar {
+  border-bottom: 1px solid var(--border-color);
 }
 
-.university-tag {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
+.VPNavBarTitle .title {
+  background: linear-gradient(120deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: 600;
 }
 
-.university-tag.tag-985 {
-  background-color: #dbeafe;
-  color: #1e40af;
+.VPNavMenu .VPNavMenuLink {
+  color: var(--text-primary);
 }
 
-.university-tag.tag-211 {
-  background-color: #fef3c7;
-  color: #92400e;
+.VPNavMenu .VPNavMenuLink.active {
+  color: var(--primary-blue);
 }
 
-.university-tag.tag-tier {
-  background-color: #e0e7ff;
-  color: #3730a3;
+/* ==================== 侧边栏样式 ==================== */
+.VPSidebar {
+  border-right: 1px solid var(--border-color);
 }
 
-/* 搜索框样式 */
-.search-container {
-  margin-bottom: 2rem;
+.VPSidebarItem .item {
+  color: var(--text-primary);
 }
 
-.search-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--vp-c-border);
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: var(--vp-c-brand);
-}
-
-/* 筛选按钮样式 */
-.filter-container {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.filter-button {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--vp-c-border);
-  border-radius: 6px;
-  background: var(--vp-c-bg);
-  color: var(--vp-c-text-1);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.filter-button:hover {
-  border-color: var(--vp-c-brand);
-  color: var(--vp-c-brand);
-}
-
-.filter-button.active {
-  background: var(--vp-c-brand);
-  color: white;
-  border-color: var(--vp-c-brand);
-}
-
-/* 统计信息样式 */
-.stats-info {
-  display: flex;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: var(--vp-c-bg-soft);
-  border-radius: 8px;
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.stat-number {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--vp-c-brand);
-}
-
-.stat-label {
-  font-size: 0.875rem;
-  color: var(--vp-c-text-2);
-}
-
-/* 收藏按钮样式 */
-.favorite-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.5rem;
-  color: var(--vp-c-text-2);
-  transition: color 0.3s ease;
-}
-
-.favorite-button:hover {
-  color: #ef4444;
-}
-
-.favorite-button.favorited {
-  color: #ef4444;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .filter-container {
-    flex-direction: column;
-  }
-
-  .filter-button {
-    width: 100%;
-  }
-
-  .stats-info {
-    flex-direction: column;
-    gap: 1rem;
-  }
+.VPSidebarItem .item.active {
+  color: var(--primary-blue);
 }
